@@ -65,7 +65,7 @@ function addTask(taskToSend) {
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
                     <td><input type="checkbox" id=status-checkbox>
-                    <label for="status-checkbox">Check when complete</label></td>
+                    <label for="status-checkbox" data-id=${dataResult[i].id}>Check when complete</label></td>
                     <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
                 </tr>`
             );

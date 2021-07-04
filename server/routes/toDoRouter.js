@@ -19,7 +19,7 @@ router.post('/', (req,res) => {
         console.log(`error making query ${queryText}`, error);
     })
 
-})
+});
 
 //GET
 
@@ -34,11 +34,27 @@ router.get('/', (req,res) => {
     .catch((error) => {
         console.log(`error making query ${queryText}`, error);
     })
-})
+
+});
 
 //PUT
 
+router.put('/:id', (req,res) => {
+    console.log('inside router.put', req.params.id);
+    const taskData = req.body;
+    const taskID = req.params.id;
+    const queryText = `UPDATE fintodo SET "status" = $1, WHERE id = $2;`;
+    pool.query(querText, [tasData.status, taskID.id])
+    .then((dbResponse) => {
+        console.log('successfully updated status', dbResponse.rows);
+        res.sendStatus(201);
+    })
+    .catch((error) => {
+        console.log('error making update to task', error);
+        res.sendStatus(500);
+    })
 
+});
 
 //DELETE
 
