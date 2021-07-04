@@ -1,7 +1,6 @@
 const pool = require('../modules/pool')
 
 const express = require('express');
-const { Pool } = require('pg');
 const router = express.Router();
 //---------router code above, calls below-------//
 
@@ -24,7 +23,18 @@ router.post('/', (req,res) => {
 
 //GET
 
-
+router.get('/', (req,res) => {
+    console.log('Inside router.get', req);
+    let queryText = `SELECT * FROM fintodo;`;
+    pool.query(queryText)
+    .then((searchData) => {
+        console.log(successfully sending back);
+        res.send(searchData.rows);
+    })
+    .catch((error) => {
+        console.log(`error making query ${queryText}`, error);
+    })
+})
 
 //PUT
 

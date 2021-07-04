@@ -3,7 +3,7 @@ console.log('js ready');
 $(document).ready( () => {
     console.log('JQ ready');
     createTaskListener();
-    // getTaskList();
+    getTaskList();
     // deleteTaskListener();
 
 });
@@ -50,6 +50,32 @@ function addTask(taskToSend) {
 /**
  * Will refresh the taskList
  */
-//  function getTaskList();
+ function getTaskList() {
+     console.log('made it to getTaskList');
+     $.ajax({
+         method: 'GET',
+         url: '/weekendApp'
+     })
+     .then( dataResult => {
+        console.log('back on client side', dataResult);
+        $('#task-list').empty();
+        for (let singleT of dataResult) {
+            $('#task-list').append(
+                `<tr>
+                    <td>${singleT.name}</td>
+                    <td>${singleT.description}</td>
+                    <td><input type="checkbox" id=status-checkbox>
+                    <label for="status-checkbox">Check when complete</label></td>
+                    <td><button class="btn btn-danger btn-sm">Delete</button></td>
+                </tr>`
+            );
+            
+        }
+     })
+     .catch(error => {
+         console.log('response did not complete', error);
+     })
+
+ };
 
 // function deleteTask();
