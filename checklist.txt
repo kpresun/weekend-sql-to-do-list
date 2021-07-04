@@ -1,0 +1,18 @@
+[] Create a input field where user can create a task
+[] As soon as they click CREATE button, the task will be stored in database
+[] create a COMPLETE checkbox
+-[] When COMPLETE checkbox is checked off, task background will change from gray to green (CSS)
+-[] Task will be updated in datebase from false to true
+[] Create a DELETE button
+-[] When the DELETE button is checked:
+--[] Prompt, 'are you sure you want to delete this? option
+--[] Task is deleted on frontend and on database
+[] (CSS) Change background color
+[] (CSS) font family and size
+[] (CSS) text color
+[] Add bootstrap for buttons
+[] Add boostrap for input fields
+[] Add boostrap for different size screens
+[] Add in query params that reverse the order of tasks
+[] Add the ability to record when tasks are completed.
+[] Show complete date on frontend
