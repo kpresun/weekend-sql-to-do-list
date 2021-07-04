@@ -9,9 +9,9 @@ const router = express.Router();
 router.post('/', (req,res) => {
     console.log('Inside router.post', req);
     const taskData = req.body;
-    const queryText = `INSERT INTO fintodo ("name", "description")
-                        VALUES ($1, $2);`;
-    pool.query( queryText, [taskData.name, taskData.description] )
+    const queryText = `INSERT INTO fintodo ("name", "description", "status")
+                        VALUES ($1, $2, $3);`;
+    pool.query( queryText, [taskData.name, taskData.description, taskData.status] )
     .then((dbResponse) => {
         res.sendStatus(201);
     })

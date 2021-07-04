@@ -19,8 +19,8 @@ function createTaskListener() {
         console.log('create task button clicked');
         let taskToSend = {
             name: $('#task-name').val(),
-            description: $('#description').val()
-            // status: $('#status-checkbox').val()
+            description: $('#description').val(),
+            status: $('#status-input').val()
         };
 
         addTask(taskToSend);
@@ -76,8 +76,9 @@ function addTask(taskToSend) {
                 `<tr>
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
+                    <td class="current-status">${dataResult[i].status}</td>
                     <td>
-                    <button type="button" data-status=${dataResult[i].status} class="status-button">Done</button>
+                    <button type="button" class="status-button">Complete</button>
                     </td>
                     <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
                 </tr>`
@@ -93,13 +94,11 @@ function addTask(taskToSend) {
 
 
 function setStatus() {
-    if ($(this).data('status') === false ) {
+    if ($('.current-status').val() == false ) {
         changeStatus($(this).data('id'), true )
     }
-    else if ($(this).data('status') === true ) {
+    else if ($('.current-status').val() == true ) {
         changeStatus($(this).data('id'), false )
-    } else {
-        changeStatus($(this).data('id'), false)
     }
 }
 
