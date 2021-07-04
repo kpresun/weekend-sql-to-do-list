@@ -30,7 +30,8 @@ function createTaskListener() {
 
 function updateTask() {
     console.log('made it to updateTask');
-    $('#status-selection').on('click', 'done-btn', () => {
+    $('.btn btn-success').on('click', () => {
+        console.log('updateTask click is working');
         changeStatus();
     });
  }
@@ -79,7 +80,7 @@ function addTask(taskToSend) {
                     <td>${dataResult[i].description}</td>
 
                     <td id="status-selection">
-                    <button type="button" id="done-btn" class="btn btn-success">Done</button>
+                    <button type="button" id="done-btn" class="btn btn-success" value="false">Done</button>
                     </td>
 
                     <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
@@ -94,14 +95,21 @@ function addTask(taskToSend) {
 
  };
 
- // this function will have take in some sort of parameter regarding buttons click to work
-function changeStatus() {
+//  this function will have take in some sort of parameter regarding buttons click to work
+function changeStatus( taskID ) {
     console.log('made it to changeStatus');
     $.ajax({
         method: 'PUT',
-        url: '/weekendApp'
-        data: 
+        url: `/weekendApp/${taskID}`,
+        data: {object},
     })
+    .then((dataResults) => {
+        console.log('results made it back to client side PUT');
+    })
+    .catch((error) => {
+        console.log('results did not make it back to client PUT', error);
+    });
+
 }
 
 // function deleteTask();
