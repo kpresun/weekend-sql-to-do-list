@@ -94,12 +94,14 @@ function addTask(taskToSend) {
 
  };
 
-// function changeStatus() {
-//     console.log('made it to changeStatus');
-//     $.ajax({
-//         method: 'PUT',
-//         url: 
-//     })
-// }
+ // this function will have take in some sort of parameter regarding buttons click to work
+function changeStatus() {
+    console.log('made it to changeStatus');
+    $.ajax({
+        method: 'PUT',
+        url: '/weekendApp'
+        data: 
+    })
+}
 
 // function deleteTask();
