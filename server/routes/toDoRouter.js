@@ -9,9 +9,9 @@ const router = express.Router();
 router.post('/', (req,res) => {
     console.log('Inside router.post', req);
     const taskData = req.body;
-    const queryText = `INSERT INTO fintodo ("name", "description", "status")
-                        VALUES ($1, $2, $3);`;
-    pool.query( queryText, [taskData.name, taskData.description, taskData.status] )
+    const queryText = `INSERT INTO fintodo ("name", "description")
+                        VALUES ($1, $2);`;
+    pool.query( queryText, [taskData.name, taskData.description] )
     .then((dbResponse) => {
         res.sendStatus(201);
     })
@@ -28,7 +28,7 @@ router.get('/', (req,res) => {
     let queryText = `SELECT * FROM fintodo;`;
     pool.query(queryText)
     .then((searchData) => {
-        console.log('successfully sending back');
+        console.log('successfully sending back through router get');
         res.send(searchData.rows);
     })
     .catch((error) => {
@@ -41,10 +41,15 @@ router.get('/', (req,res) => {
 
 router.put('/:id', (req,res) => {
     console.log('inside router.put', req.params.id);
-    const taskData = req.body;
+    const taskStatus = req.body.status;
     const taskID = req.params.id;
-    const queryText = `UPDATE fintodo SET "status" = $1, WHERE id = $2;`;
-    pool.query(querText, [tasData.status, taskID.id])
+    let queryText = '';
+    if (taskStatus === true) {
+        queryText = `UPDATE fintodo SET "status" = false WHERE id = $1;`;
+    } else if (taskStatus === false) {
+        queryText = `UPDATE fintodo SET "status" = true WHERE id = $1;`;
+    }
+    pool.query(queryText, [taskID.id])
     .then((dbResponse) => {
         console.log('successfully updated status', dbResponse.rows);
         res.sendStatus(201);

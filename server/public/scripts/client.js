@@ -3,7 +3,7 @@ console.log('js ready');
 $(document).ready( () => {
     console.log('JQ ready');
     createTaskListener();
-    updateTask();
+    updateStatus();
     getTaskList();
     // deleteTaskListener();
 
@@ -19,8 +19,8 @@ function createTaskListener() {
         console.log('create task button clicked');
         let taskToSend = {
             name: $('#task-name').val(),
-            description: $('#description').val(),
-            status: $('#status-checkbox').val()
+            description: $('#description').val()
+            // status: $('#status-checkbox').val()
         };
 
         addTask(taskToSend);
@@ -28,13 +28,13 @@ function createTaskListener() {
     });
 }
 
-function updateTask() {
-    console.log('made it to updateTask');
-    $('.btn btn-success').on('click', () => {
-        console.log('updateTask click is working');
-        changeStatus();
-    });
- }
+function updateStatus() {
+    $('#task-list').on('click', '.status-button', () => {
+        console.log('update status click is working');
+        setStatus();
+    })
+}
+
 // if above function doesn't work might need to change the listener directly to done-btn
 
 
@@ -59,8 +59,6 @@ function addTask(taskToSend) {
     })
 };
 
-
-
 /**
  * Will refresh the taskList
  */
@@ -78,11 +76,9 @@ function addTask(taskToSend) {
                 `<tr>
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
-
-                    <td id="status-selection">
-                    <button type="button" id="done-btn" class="btn btn-success" value="false">Done</button>
+                    <td>
+                    <button type="button" data-status=${dataResult[i].status} class="status-button">Done</button>
                     </td>
-
                     <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
                 </tr>`
             );
@@ -95,16 +91,32 @@ function addTask(taskToSend) {
 
  };
 
+
+function setStatus() {
+    if ($(this).data('status') === false ) {
+        changeStatus($(this).data('id'), true )
+    }
+    else if ($(this).data('status') === true ) {
+        changeStatus($(this).data('id'), false )
+    } else {
+        changeStatus($(this).data('id'), false)
+    }
+}
+
 //  this function will have take in some sort of parameter regarding buttons click to work
-function changeStatus( taskID ) {
+function changeStatus( taskID, taskStatus ) {
     console.log('made it to changeStatus');
+
     $.ajax({
         method: 'PUT',
         url: `/weekendApp/${taskID}`,
-        data: {object},
+        data: {
+            status: taskStatus
+        },
     })
     .then((dataResults) => {
         console.log('results made it back to client side PUT');
+        getTaskList();
     })
     .catch((error) => {
         console.log('results did not make it back to client PUT', error);
