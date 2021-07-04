@@ -5,7 +5,7 @@ $(document).ready( () => {
     createTaskListener();
     updateStatus();
     getTaskList();
-    // deleteTaskListener();
+    deleteTaskListener();
 
 });
 //---------------------Listeners below-------------------------//
@@ -32,6 +32,13 @@ function updateStatus() {
     $('#task-list').on('click', '.status-button', () => {
         console.log('update status click is working');
         setStatus();
+    })
+}
+
+function deleteTaskListener() {
+    $('#task-list').on('click', '.delete-button', () => {
+        console.log('delete click is working');
+        deleteTask($(this).data('id'));
     })
 }
 
@@ -80,7 +87,7 @@ function addTask(taskToSend) {
                     <td>
                     <button type="button" class="status-button">Complete</button>
                     </td>
-                    <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
+                    <td><button class="delete-button" data-id=${dataResult[i].id}>Delete</button></td>
                 </tr>`
             );
             
@@ -103,12 +110,12 @@ function setStatus() {
 }
 
 //  this function will have take in some sort of parameter regarding buttons click to work
-function changeStatus( taskID, taskStatus ) {
+function changeStatus( taskId, taskStatus ) {
     console.log('made it to changeStatus');
 
     $.ajax({
         method: 'PUT',
-        url: `/weekendApp/${taskID}`,
+        url: `/weekendApp/${taskId}`,
         data: {
             status: taskStatus
         },
@@ -123,4 +130,16 @@ function changeStatus( taskID, taskStatus ) {
 
 }
 
-// function deleteTask();
+function deleteTask(taskId) {
+    $.ajax({
+        method: 'DELETE',
+        url: `weekendApp/${taskId}`
+    })
+    .then((response) => {
+        console.log('task was deleted', response);
+    })
+    .catch((error) => {
+        console.log('Unable to delete task', error);
+    });
+
+}
