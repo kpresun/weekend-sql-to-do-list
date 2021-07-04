@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('server/public'));
 
-// app.use('/toDo, toDoRouter');
+// app.use('/fintodo, toDoRouter'); LATER FOR AJAX
 
 app.listen(PORT, () => {
     console.log('listening on port', PORT);
