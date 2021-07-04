@@ -28,7 +28,7 @@ router.get('/', (req,res) => {
     let queryText = `SELECT * FROM fintodo;`;
     pool.query(queryText)
     .then((searchData) => {
-        console.log(successfully sending back);
+        console.log('successfully sending back');
         res.send(searchData.rows);
     })
     .catch((error) => {
