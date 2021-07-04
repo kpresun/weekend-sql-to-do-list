@@ -12,13 +12,13 @@ $(document).ready( () => {
  * function will listen for click on create task
  */
 function createTaskListener() {
-    console.log('made it to createTaskListner');
+    console.log('made it to createTaskListener');
     $('#create-button').on('click', () => {
         console.log('create task button clicked');
         let taskToSend = {
-            name: $('#task-name').val();
-            description: $('#description').val();
-            status: $('#status-checkbox').val();
+            name: $('#task-name').val(),
+            description: $('#description').val(),
+            status: $('#status-checkbox').val()
         };
 
         addTask(taskToSend);
@@ -41,15 +41,15 @@ function addTask(taskToSend) {
         getTaskList();
     })
     .catch((error) => {
-        console.log('task did not send' error);
+        console.log('task did not send', error);
     })
 };
 
 
 
 /**
- * Will refresh the tasklist
+ * Will refresh the taskList
  */
- function getTaskList();
+//  function getTaskList();
 
-function deleteTask();
+// function deleteTask();
