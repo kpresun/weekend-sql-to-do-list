@@ -52,21 +52,21 @@ function addTask(taskToSend) {
  */
  function getTaskList() {
      console.log('made it to getTaskList');
+     $('#task-list').empty();
      $.ajax({
          method: 'GET',
          url: '/weekendApp'
      })
-     .then( dataResult => {
+     .then( (dataResult) => {
         console.log('back on client side', dataResult);
-        $('#task-list').empty();
-        for (let singleT of dataResult) {
+        for (let i = 0; i < dataResult.length; i++) {
             $('#task-list').append(
                 `<tr>
-                    <td>${singleT.name}</td>
-                    <td>${singleT.description}</td>
+                    <td>${dataResult[i].name}</td>
+                    <td>${dataResult[i].description}</td>
                     <td><input type="checkbox" id=status-checkbox>
                     <label for="status-checkbox">Check when complete</label></td>
-                    <td><button class="btn btn-danger btn-sm">Delete</button></td>
+                    <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
                 </tr>`
             );
             
