@@ -3,8 +3,8 @@ console.log('js ready');
 $(document).ready( () => {
     console.log('JQ ready');
     createTaskListener();
-    getTaskList();
-    deleteTaskListener();
+    // getTaskList();
+    // deleteTaskListener();
 
 });
 
@@ -37,11 +37,11 @@ function addTask(taskToSend) {
         data: taskToSend
     })
     .then((response) => {
-        console.log('back at ');
+        console.log('back on client side');
         getTaskList();
     })
     .catch((error) => {
-        console.log('task did not send', error);
+        console.log('response did not complete', error);
     })
 };
 
