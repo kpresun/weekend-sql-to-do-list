@@ -3,10 +3,12 @@ console.log('js ready');
 $(document).ready( () => {
     console.log('JQ ready');
     createTaskListener();
+    // updateTask();
     getTaskList();
     // deleteTaskListener();
 
 });
+//---------------------Listeners below-------------------------//
 
 /**
  * function will listen for click on create task
@@ -25,6 +27,15 @@ function createTaskListener() {
 
     });
 }
+
+// function updateTask() {
+//     console.log('made it to updateTask');
+//     $('#status-checkbox').on('click', () => {
+//         changeStatus();
+//     });
+//  }
+
+//-----------------------------------------//
 
 /**
  * params: taskToSend
@@ -64,8 +75,11 @@ function addTask(taskToSend) {
                 `<tr>
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
-                    <td><input type="checkbox" id=status-checkbox>
-                    <label for="status-checkbox" data-id=${dataResult[i].id}>Check when complete</label></td>
+                    <td id="status-selection">
+                    <button type="button" id="toDo-btn" class="btn btn-danger">To Do</button>
+                    <button type="button" id="doing-btn" class="btn btn-warning">Doing</button>
+                    <button type="button" id="done-btn" class="btn btn-success">Done</button>
+                    </td>
                     <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
                 </tr>`
             );
@@ -77,5 +91,13 @@ function addTask(taskToSend) {
      })
 
  };
+
+// function changeStatus() {
+//     console.log('made it to changeStatus');
+//     $.ajax({
+//         method: 'PUT',
+//         url: 
+//     })
+// }
 
 // function deleteTask();
