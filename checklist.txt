@@ -1,4 +1,6 @@
-[] Create a input field where user can create a task
+[X] Create a input field where user can create a task
+[X] Create database
+[] Create table
 [] As soon as they click CREATE button, the task will be stored in database
 [] create a COMPLETE checkbox
 -[] When COMPLETE checkbox is checked off, task background will change from gray to green (CSS)

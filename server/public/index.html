@@ -24,10 +24,23 @@
         </section>
         <section id="table-section">
             <table id="table-one">
-                <tr>
-                    <th>Task</th>
-                    <th>Description</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="task-list">
+                    <th>Html file</th>
+                    <th>Create elements with classes and IDs</th>
+                    <th>
+                        <input type="checkbox" id=status-checkbox>
+                        <label for="status-checkbox">Check when complete</label>
+                    </th>
+                    <th><button class="btn btn-danger btn-sm">Delete</button></th>
+                </tbody>
             </table>
         </section>
     </main>
