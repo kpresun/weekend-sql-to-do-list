@@ -8,11 +8,29 @@
     <script src="vendors/jquery.js"></script>
     <script src="scripts/client.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"> -->
+    <!-- Adding Bootstrap later -->
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <header></header>
-    <main></main>
+    <header>
+        <h1>FinToDo(:</h1>
+        <h2>Use this app to create a to do list for application development</h2>
+    </header>
+    <main>
+        <section id="input-section">
+            <input type="text" id="task-name" class="input-field" placeholder="Task Name">
+            <input type="text" id="description" class="input-field" placeholder="Task Description">
+            <button type="button" id="create-button" class="btn btn-primary"> Create task</button>
+        </section>
+        <section id="table-section">
+            <table id="table-one">
+                <tr>
+                    <th>Task</th>
+                    <th>Description</th>
+                </tr>
+            </table>
+        </section>
+    </main>
     <footer></footer>
 </body>
 </html>
