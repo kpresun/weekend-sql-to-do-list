@@ -3,7 +3,7 @@ console.log('js ready');
 $(document).ready( () => {
     console.log('JQ ready');
     createTaskListener();
-    // updateTask();
+    updateTask();
     getTaskList();
     // deleteTaskListener();
 
@@ -28,12 +28,14 @@ function createTaskListener() {
     });
 }
 
-// function updateTask() {
-//     console.log('made it to updateTask');
-//     $('#status-checkbox').on('click', () => {
-//         changeStatus();
-//     });
-//  }
+function updateTask() {
+    console.log('made it to updateTask');
+    $('#status-selection').on('click', 'done-btn', () => {
+        changeStatus();
+    });
+ }
+// if above function doesn't work might need to change the listener directly to done-btn
+
 
 //-----------------------------------------//
 
@@ -75,11 +77,11 @@ function addTask(taskToSend) {
                 `<tr>
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
+
                     <td id="status-selection">
-                    <button type="button" id="toDo-btn" class="btn btn-danger">To Do</button>
-                    <button type="button" id="doing-btn" class="btn btn-warning">Doing</button>
                     <button type="button" id="done-btn" class="btn btn-success">Done</button>
                     </td>
+
                     <td><button class="btn btn-danger btn-sm" data-id=${dataResult[i].id}>Delete</button></td>
                 </tr>`
             );
