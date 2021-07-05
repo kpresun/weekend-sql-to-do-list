@@ -44,10 +44,10 @@ router.put('/:id', (req,res) => {
     const taskStatus = req.body.status;
     const taskId = req.params.id;
     let queryText = '';
-    if (taskStatus === true) {
-        queryText = `UPDATE fintodo SET "status"='false' WHERE id = $1;`;
-    } else if (taskStatus === false) {
+    if (taskStatus == true) {
         queryText = `UPDATE fintodo SET "status"='true' WHERE id = $1;`;
+    } else if (taskStatus == false) {
+        queryText = `UPDATE fintodo SET "status"='false' WHERE id = $1;`;
     }
     pool.query(queryText, [taskId.id])
     .then((dbResponse) => {
@@ -66,17 +66,17 @@ router.put('/:id', (req,res) => {
 router.delete('/:id', (req, res) => {
     const taskId = req.params.id;
     console.log(`task id is ${taskId}`);
-    const queryText = `DELETE FROM fintodo WHERE id = $1;`;
+    const queryText = `DELETE FROM fintodo WHERE "id" = $1;`;
     pool.query(queryText, [taskId])
     .then((dbResponse) => {
-        console.log(`successfully deleted task server side, ${$dbResponse.rowCount === 1}`);
+        console.log(`successfully deleted task server side`);
         res.sendStatus(200);
     })
     .catch((error) => {
         console.log(`Could not delete task with id ${taskId} on server side`, error);
         res.sendStatus(500);
-    });
-})
+    })
+});
 
 
 module.exports = router;

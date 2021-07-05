@@ -24,8 +24,9 @@ function createTaskListener() {
         };
 
         addTask(taskToSend);
-
+        clearInputs();
     });
+
 }
 
 function updateStatus() {
@@ -38,7 +39,8 @@ function updateStatus() {
 function deleteTaskListener() {
     $('#task-list').on('click', '.delete-button', () => {
         console.log('delete click is working');
-        deleteTask($(this).data('id'));
+        deleteTask($('.delete-button').data('id'));
+        console.log($('.delete-button').data('id'));
     })
 }
 
@@ -102,10 +104,10 @@ function addTask(taskToSend) {
 
 function setStatus() {
     if ($('.current-status').val() == false ) {
-        changeStatus($(this).data('id'), true )
+        changeStatus($('.delete-button').data('id'), true )
     }
     else if ($('.current-status').val() == true ) {
-        changeStatus($(this).data('id'), false )
+        changeStatus($('.delete-button').data('id'), false )
     }
 }
 
@@ -133,13 +135,21 @@ function changeStatus( taskId, taskStatus ) {
 function deleteTask(taskId) {
     $.ajax({
         method: 'DELETE',
-        url: `weekendApp/${taskId}`
+        url: `weekendApp/${taskId}`,
     })
     .then((response) => {
         console.log('task was deleted', response);
+        getTaskList();
     })
     .catch((error) => {
         console.log('Unable to delete task', error);
     });
 
+}
+
+
+function clearInputs() {
+    $('#task-name').val('');
+    $('#description').val('');
+    $('#status-input').val('');
 }
