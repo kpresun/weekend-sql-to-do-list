@@ -31,20 +31,19 @@ function createTaskListener() {
 
 function updateStatus() {
     $('#task-list').on('click', '.status-button', () => {
-        console.log(currentStatus);
         console.log('update status click is working');
-        // setStatus();
+        setStatus();
     })
 }
 
-// function setStatus() {
-//     if ($('.current-status').val() == false ) {
-//         changeStatus($('.delete-button').data('id'), true )
-//     }
-//     else if ($('.current-status').val() == true ) {
-//         changeStatus($('.delete-button').data('id'), false )
-//     }
-// }
+function setStatus() {
+    if ($('.current-status').val() == false ) {
+        changeStatus($('.delete-button').data('id'), true )
+    }
+    else if ($('.current-status').val() == true ) {
+        changeStatus($('.delete-button').data('id'), false )
+    }
+}
 
 function deleteTaskListener() {
     $('#task-list').on('click', '.delete-button', () => {
