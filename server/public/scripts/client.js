@@ -31,10 +31,20 @@ function createTaskListener() {
 
 function updateStatus() {
     $('#task-list').on('click', '.status-button', () => {
+        console.log(currentStatus);
         console.log('update status click is working');
-        setStatus();
+        // setStatus();
     })
 }
+
+// function setStatus() {
+//     if ($('.current-status').val() == false ) {
+//         changeStatus($('.delete-button').data('id'), true )
+//     }
+//     else if ($('.current-status').val() == true ) {
+//         changeStatus($('.delete-button').data('id'), false )
+//     }
+// }
 
 function deleteTaskListener() {
     $('#task-list').on('click', '.delete-button', () => {
@@ -85,7 +95,7 @@ function addTask(taskToSend) {
                 `<tr>
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
-                    <td class="current-status">${dataResult[i].status}</td>
+                    <td data-status="${dataResult[i].status}">${dataResult[i].status}</td>
                     <td>
                     <button type="button" class="status-button">Complete</button>
                     </td>
@@ -101,15 +111,6 @@ function addTask(taskToSend) {
 
  };
 
-
-function setStatus() {
-    if ($('.current-status').val() == false ) {
-        changeStatus($('.delete-button').data('id'), true )
-    }
-    else if ($('.current-status').val() == true ) {
-        changeStatus($('.delete-button').data('id'), false )
-    }
-}
 
 //  this function will have take in some sort of parameter regarding buttons click to work
 function changeStatus( taskId, taskStatus ) {
