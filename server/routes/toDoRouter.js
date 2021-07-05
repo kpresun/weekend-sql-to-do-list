@@ -24,7 +24,7 @@ router.post('/', (req,res) => {
 //GET
 
 router.get('/', (req,res) => {
-    console.log('Inside router.get', req);
+    console.log('Inside router.get');
     let queryText = `SELECT * FROM fintodo;`;
     pool.query(queryText)
     .then((searchData) => {
@@ -43,19 +43,14 @@ router.put('/:id', (req,res) => {
     console.log('inside router.put', req.params.id);
     const taskStatus = req.body.status;
     const taskId = req.params.id;
-    let queryText = '';
-    if (taskStatus == true) {
-        queryText = `UPDATE fintodo SET "status"='true' WHERE id = $1;`;
-    } else if (taskStatus == false) {
-        queryText = `UPDATE fintodo SET "status"='false' WHERE id = $1;`;
-    }
-    pool.query(queryText, [taskId.id])
+    let queryText = `UPDATE fintodo SET "status"=NOT "status" WHERE id = $1;`;
+    pool.query(queryText, [taskId])
     .then((dbResponse) => {
-        console.log('successfully updated status', dbResponse.rows);
+        console.log('successfully updated status');
         res.sendStatus(201);
     })
     .catch((error) => {
-        console.log('error making update to task', error);
+        // console.log('error making update to task', error);
         res.sendStatus(500);
     })
 

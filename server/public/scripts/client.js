@@ -30,20 +30,12 @@ function createTaskListener() {
 }
 
 function updateStatus() {
-    $('#task-list').on('click', '.status-button', () => {
-        console.log('update status click is working');
-        setStatus();
+    $('#task-list').on('click', '.status-button', function() {
+        console.log('update status click is working', $(this).parent().parent().data());
+        changeStatus($(this).parent().parent().data());
     })
 }
 
-function setStatus() {
-    if ($('.current-status').val() == false ) {
-        changeStatus($('.delete-button').data('id'), true )
-    }
-    else if ($('.current-status').val() == true ) {
-        changeStatus($('.delete-button').data('id'), false )
-    }
-}
 
 function deleteTaskListener() {
     $('#task-list').on('click', '.delete-button', () => {
@@ -91,14 +83,12 @@ function addTask(taskToSend) {
         console.log('back on client side', dataResult);
         for (let i = 0; i < dataResult.length; i++) {
             $('#task-list').append(
-                `<tr>
+                `<tr data-status="${dataResult[i].status}" data-id="${dataResult[i].id}">
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
-                    <td data-status="${dataResult[i].status}">${dataResult[i].status}</td>
-                    <td>
-                    <button type="button" class="status-button">Complete</button>
-                    </td>
-                    <td><button class="delete-button" data-id=${dataResult[i].id}>Delete</button></td>
+                    <td>${dataResult[i].status}</td>
+                    <td><button type="button" class="status-button">Complete</button></td>
+                    <td><button class="delete-button" >Delete</button></td>
                 </tr>`
             );
             
@@ -112,14 +102,14 @@ function addTask(taskToSend) {
 
 
 //  this function will have take in some sort of parameter regarding buttons click to work
-function changeStatus( taskId, taskStatus ) {
-    console.log('made it to changeStatus');
+function changeStatus( task ) {
+    console.log('made it to changeStatus', task);
 
     $.ajax({
         method: 'PUT',
-        url: `/weekendApp/${taskId}`,
+        url: `/weekendApp/${task.id}`,
         data: {
-            status: taskStatus
+            status: task.status
         },
     })
     .then((dataResults) => {
