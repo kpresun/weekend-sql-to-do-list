@@ -33,6 +33,7 @@ function updateStatus() {
     $('#task-list').on('click', '.status-button', function() {
         console.log('update status click is working', $(this).parent().parent().data());
         changeStatus($(this).parent().parent().data());
+        changeColor($(this).parent().parent().data());
     })
 }
 
@@ -82,7 +83,7 @@ function addTask(taskToSend) {
         console.log('back on client side', dataResult);
         for (let i = 0; i < dataResult.length; i++) {
             $('#task-list').append(
-                `<tr data-status="${dataResult[i].status}" data-id="${dataResult[i].id}">
+                `<tr "data-status="${dataResult[i].status}" data-id="${dataResult[i].id}">
                     <td>${dataResult[i].name}</td>
                     <td>${dataResult[i].description}</td>
                     <td>${dataResult[i].status}</td>
@@ -114,7 +115,7 @@ function changeStatus( task ) {
     .then((dataResults) => {
         console.log('results made it back to client side PUT');
         getTaskList();
-        changeColor();
+        changeColor(task);
         
     })
     .catch((error) => {
@@ -145,12 +146,14 @@ function clearInputs() {
     $('#status-input').val('');
 }
 
-function changeColor() {
-    let el = $('.delete-button').parent().parent().attr('status')
-    if (el === true) {
-        $('.status-button').css('color', 'green')
+// Color of button is changing but unable to stay changed because getList
+// is called in several places
+function changeColor(task) {
+    console.log('made it to changing color', task.status);
+    if (task.status === true) {
+        $('.status-button').css('background-color', 'green')
     } else {
-        $('.status-button').css('color', 'red')
+        $('.status-button').css('background-color', 'red')
     }
 
 };
