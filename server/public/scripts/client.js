@@ -38,10 +38,9 @@ function updateStatus() {
 
 
 function deleteTaskListener() {
-    $('#task-list').on('click', '.delete-button', () => {
-        console.log('delete click is working');
-        deleteTask($('.delete-button').data('id'));
-        console.log($('.delete-button').data('id'));
+    $('#task-list').on('click', '.delete-button', function() {
+        console.log('delete click is working', $(this).parent().parent().data());
+        deleteTask($(this).parent().parent().data());
     })
 }
 
@@ -115,6 +114,8 @@ function changeStatus( task ) {
     .then((dataResults) => {
         console.log('results made it back to client side PUT');
         getTaskList();
+        changeColor();
+        
     })
     .catch((error) => {
         console.log('results did not make it back to client PUT', error);
@@ -122,10 +123,10 @@ function changeStatus( task ) {
 
 }
 
-function deleteTask(taskId) {
+function deleteTask(task) {
     $.ajax({
         method: 'DELETE',
-        url: `weekendApp/${taskId}`,
+        url: `weekendApp/${task.id}`,
     })
     .then((response) => {
         console.log('task was deleted', response);
@@ -143,3 +144,13 @@ function clearInputs() {
     $('#description').val('');
     $('#status-input').val('');
 }
+
+function changeColor() {
+    let el = $('.delete-button').parent().parent().attr('status')
+    if (el === true) {
+        $('.status-button').css('color', 'green')
+    } else {
+        $('.status-button').css('color', 'red')
+    }
+
+};

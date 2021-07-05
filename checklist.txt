@@ -3,9 +3,10 @@
 [x] Create table
 [x] As soon as they click CREATE button, the task will be stored in database
 [x] create a STATUS section with 3 boxes
--[] When STATUS is clicked
--- [] change status to true
--[] Task will be updated in dateBase from false to true
+-[x] When STATUS is clicked
+-- [x] change status to true
+--[x] change color of button when true or false
+-[x] Task will be updated in dateBase from false to true
 [x] Create a DELETE button
 -[x] When the DELETE button is clicked:
 --[] Prompt, 'are you sure you want to delete this? option
