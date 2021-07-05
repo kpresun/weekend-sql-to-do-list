@@ -37,7 +37,6 @@ function updateStatus() {
     })
 }
 
-
 function deleteTaskListener() {
     $('#task-list').on('click', '.delete-button', function() {
         console.log('delete click is working', $(this).parent().parent().data());
@@ -46,9 +45,6 @@ function deleteTaskListener() {
 }
 
 // if above function doesn't work might need to change the listener directly to done-btn
-
-
-//-----------------------------------------//
 
 /**
  * params: taskToSend

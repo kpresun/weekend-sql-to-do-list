@@ -5,15 +5,15 @@
 [x] create a STATUS section with 3 boxes
 -[x] When STATUS is clicked
 -- [x] change status to true
---[x] change color of button when true or false
+--[] change color of button when true or false
 -[x] Task will be updated in dateBase from false to true
 [x] Create a DELETE button
 -[x] When the DELETE button is clicked:
 --[] Prompt, 'are you sure you want to delete this? option
 --[x] Task is deleted on frontend and on database
-[] (CSS) Change background color
-[] (CSS) font family and size
-[] (CSS) text color
+[x] (CSS) Change background color
+[x] (CSS) font family and size
+[x] (CSS) text color
 [] Add bootstrap for buttons
 [] Add bootstrap for input fields
 [] Add bootstrap for different size screens
